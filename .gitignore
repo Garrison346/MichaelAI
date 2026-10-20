@@ -16,6 +16,7 @@ runs/
 /dataset/classification/val/
 /dataset/classification/valid/
 /dataset/classification/test/
+/dataset/classification/*.cache
 
 # Detection Dataset Images & Labels
 /dataset/detection/train/
