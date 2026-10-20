@@ -19,6 +19,7 @@ def main():
         device="cpu",       # Portable; use 0 for local GPU
         project=str(ROOT / "runs" / "classify"),
         name="fire_baseline_test",
+        exist_ok=True,      # Reuse the run folder instead of fire_baseline_test2, 3, ...
     )
 
     print(f"Test accuracy: {metrics.top1:.2%}")

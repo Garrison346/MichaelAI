@@ -20,13 +20,14 @@ def main():
         data=str(DATASET),  # Classification dataset
         epochs=40,          # Maximum training epochs
         imgsz=224,          # Image resolution (224x224)
-        batch=8,            # Images per optimization step (4GB VRAM)
+        batch=32,           # Images per optimization step
         patience=10,        # Early stopping
         workers=2,          # Parallel data-loading processes
         seed=42,            # Reproducibility
         device=0,           # NVIDIA GTX 1650 (CUDA)
         project=str(ROOT / "runs" / "classify"),  # Output directory
         name="fire_baseline",  # Experiment name
+        exist_ok=True,      # Reuse the run folder instead of fire_baseline2, 3, ...
     )
 
 
