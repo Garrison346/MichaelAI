@@ -10,7 +10,7 @@ DATASET = ROOT / "dataset" / "classification"
 Dataset Split:
 Training: ~87.3% 
 Validation: ~8.5%
-Test: ~4.2%
+Test: ~4.2%     
 '''
 
 def main():

@@ -54,6 +54,10 @@ Dataset files are excluded from Git where configured in `.gitignore`. Contributo
 
 Both datasets were accessed on October 11, 2026.
 
+### Classification Split
+
+Uses Roboflow's original train/val/test split. Augmented copies exist only in train, and `scripts/check_classification_leakage.py` confirms no image group or exact duplicate crosses splits. About 6% of test images are near-duplicates of training images.
+
 ---
 
 ## 📄 References
