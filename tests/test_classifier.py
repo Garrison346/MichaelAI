@@ -9,8 +9,9 @@ from src.perception import classifier as classifier_module
 from src.perception.classifier import FireClassifier
 
 ROOT = Path(__file__).resolve().parents[1]
-WEIGHTS = ROOT / "runs" / "classify" / "fire_baseline" / "weights" / "best.pt"
-FIRE_IMAGES = ROOT / "dataset" / "classification" / "test" / "fire"
+WEIGHTS = ROOT / "models" / "fire_baseline.pt"
+# Committed images, so real-model tests run on a fresh clone without the dataset
+SAMPLE_IMAGES = ROOT / "dataset" / "classification" / "test_hard"
 
 
 class FakeYOLO:
@@ -39,8 +40,8 @@ def use_fake_model(monkeypatch, names, probs=(0.5, 0.5)):
     )
 
 
-def first_fire_image():
-    return next(FIRE_IMAGES.glob("*.jpg"))
+def sample_image():
+    return next(SAMPLE_IMAGES.glob("*/*.jpg"))
 
 
 def test_missing_weights_raises(tmp_path):
@@ -94,7 +95,7 @@ def test_threshold_boundary_counts_as_fire(monkeypatch, weights_file):
 
 @pytest.mark.skipif(not WEIGHTS.is_file(), reason="Trained weights not found")
 def test_classifies_real_image():
-    image = first_fire_image()
+    image = sample_image()
 
     prediction = FireClassifier(WEIGHTS).predict(str(image))
 
@@ -105,7 +106,7 @@ def test_classifies_real_image():
 @pytest.mark.skipif(not WEIGHTS.is_file(), reason="Trained weights not found")
 def test_classifies_camera_frame():
     # The robot passes OpenCV frames (numpy BGR arrays), not file paths
-    frame = cv2.imread(str(first_fire_image()))
+    frame = cv2.imread(str(sample_image()))
 
     prediction = FireClassifier(WEIGHTS).predict(frame)
 

@@ -60,7 +60,8 @@ From `runs/classify/<name>/results.png`, note:
 
 ### 3. Test set + threshold sweep
 
-Set `RUN = "<name>"` at the top of both scripts, then:
+Set `RUN = "<name>"` at the top of both scripts (they use
+`runs/classify/<name>/weights/best.pt`, falling back to `models/<name>.pt`), then:
 
 ```
 python scripts/evaluate_classifier.py
@@ -84,12 +85,16 @@ fixed by thresholds; it needs more training data of that kind.
 
 ### 5. Compare against the baseline
 
-Baseline `fire_baseline`: best.pt from epoch 22 (stopped early at 32),
+Baseline `fire_baseline` (committed as `models/fire_baseline.pt`): best.pt from epoch 22 (stopped early at 32),
 threshold 0.5, test accuracy 98.80%, 213/213 fires caught, 5 false alarms
 (sunset and cloud/haze scenes; worst `NF_126` at 0.987, `NF_496` at 0.973).
 
-If the new model is adopted, update the README "Baseline Results" table and
-`RUN_DIR` in `dashboard/app.py`.
+If the new model is adopted:
+- copy `runs/classify/<name>/weights/best.pt` to `models/<name>.pt` and
+  `results.csv` to `models/<name>_results.csv` (both get committed)
+- point `MODEL_PATH` / `RESULTS_PATH` in `dashboard/app.py` and `WEIGHTS` in
+  `tests/test_classifier.py` at them
+- update the README "Baseline Results" table
 
 ## Report format
 

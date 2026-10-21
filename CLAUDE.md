@@ -13,9 +13,10 @@ Fire/smoke detection robot. YOLOv8 classification (fire/nofire) now; detection l
 - `src/perception/classifier.py` (`FireClassifier`) reports probabilities only.
   On any inference failure it must raise, never return "nofire". Robot
   decisions belong to the control code.
-- `dataset/` images and `runs/` are gitignored; only scripts, docs and READMEs are committed.
-- Run `pytest` before committing. The real-model tests skip when
-  `runs/classify/fire_baseline/weights/best.pt` is missing.
+- `dataset/` images and `runs/` are gitignored. Exceptions: the small `dataset/classification/test_hard/`
+  set, and adopted models in `models/` (`fire_baseline.pt` + its `results.csv`), so a fresh
+  clone can run the dashboard and tests without training. `runs/` is for experiments.
+- Run `pytest` before committing.
 
 ## Workflows
 - Training, evaluating or comparing classifier runs: use the

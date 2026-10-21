@@ -9,9 +9,8 @@ from PIL import Image
 
 # Project directories
 ROOT = Path(__file__).resolve().parents[1]
-RUN_DIR = ROOT / "runs" / "classify" / "fire_baseline"
-MODEL_PATH = RUN_DIR / "weights" / "best.pt"
-RESULTS_PATH = RUN_DIR / "results.csv"
+MODEL_PATH = ROOT / "models" / "fire_baseline.pt"
+RESULTS_PATH = ROOT / "models" / "fire_baseline_results.csv"
 
 # Make src/ importable when run via `streamlit run dashboard/app.py`
 sys.path.insert(0, str(ROOT))

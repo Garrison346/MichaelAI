@@ -7,6 +7,10 @@ RUN = "fire_baseline"  # Training run to sweep
 WEIGHTS = ROOT / "runs" / "classify" / RUN / "weights" / "best.pt"
 THRESHOLDS = (0.5, 0.4, 0.3)
 
+# Fall back to the committed copy of an adopted model (fresh clones have no runs/)
+if not WEIGHTS.exists():
+    WEIGHTS = ROOT / "models" / f"{RUN}.pt"
+
 # Make src/ importable when run as `python scripts/sweep_threshold.py`
 sys.path.insert(0, str(ROOT))
 from src.perception.classifier import FireClassifier

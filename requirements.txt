@@ -1,6 +1,8 @@
-ultralytics>=8.0.0
-opencv-python>=4.8.0
-streamlit
-pillow
-pandas
-pytest
+# Pinned to the versions this project was tested with.
+# torch is installed by ultralytics; install the CUDA build separately for GPU training.
+ultralytics==8.4.175
+opencv-python==5.0.0.93
+streamlit==1.66.0
+pillow==12.3.0
+pandas==3.0.6
+pytest==9.1.1

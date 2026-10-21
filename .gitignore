@@ -8,6 +8,7 @@ __pycache__/
 
 # Model Weights & Output Directories
 *.pt
+!/models/*.pt
 *.onnx
 runs/
 
@@ -29,3 +30,8 @@ runs/
 
 # Keep dataset configuration
 !/dataset/detection/data.yaml
+
+# Local settings & secrets
+.claude/settings.local.json
+.env
+.streamlit/secrets.toml

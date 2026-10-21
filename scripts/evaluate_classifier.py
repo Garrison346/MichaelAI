@@ -7,6 +7,10 @@ DATASET = ROOT / "dataset" / "classification"
 RUN = "fire_baseline"  # Training run to evaluate
 WEIGHTS = ROOT / "runs" / "classify" / RUN / "weights" / "best.pt"
 
+# Fall back to the committed copy of an adopted model (fresh clones have no runs/)
+if not WEIGHTS.exists():
+    WEIGHTS = ROOT / "models" / f"{RUN}.pt"
+
 
 def main():
     # Evaluate on held-out test images
