@@ -4,7 +4,8 @@ from ultralytics import YOLO
 
 ROOT = Path(__file__).resolve().parents[1]
 DATASET = ROOT / "dataset" / "classification"
-WEIGHTS = ROOT / "runs" / "classify" / "fire_baseline" / "weights" / "best.pt"
+RUN = "fire_baseline"  # Training run to evaluate
+WEIGHTS = ROOT / "runs" / "classify" / RUN / "weights" / "best.pt"
 
 
 def main():
@@ -18,8 +19,8 @@ def main():
         batch=8,
         device="cpu",       # Portable; use 0 for local GPU
         project=str(ROOT / "runs" / "classify"),
-        name="fire_baseline_test",
-        exist_ok=True,      # Reuse the run folder instead of fire_baseline_test2, 3, ...
+        name=f"{RUN}_test",
+        exist_ok=True,      # Reuse the run folder instead of <run>_test2, 3, ...
     )
 
     print(f"Test accuracy: {metrics.top1:.2%}")
