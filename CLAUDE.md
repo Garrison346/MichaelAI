@@ -35,3 +35,4 @@ Fire/smoke detection robot. YOLOv8 classification (fire/nofire) now; detection l
 - Training, evaluating or comparing classifier runs: use the
   `evaluate-fire-classifier` skill (`.claude/skills/`).
 - Dashboard: `streamlit run dashboard/app.py`.
+- ROS build, sim test or sim/Nav2 debugging: use the `validate-ros-stack` skill.
