@@ -35,8 +35,9 @@ MSYS_NO_PATHCONV=1 wsl.exe -e bash -c "source /opt/ros/jazzy/setup.bash && cd $R
 2. Test: run the `launch_test` command from the README in the background, logging to a file.
 3. Read the log, not just the exit code. Check `OK`/`FAILED`, the failing stage's message, and the
    `[baseline]` lines. An example passing run (values vary): 2/8 headings traversable, goal (0, 1),
-   known cells about 1170 → 3500, about 35 s. Noise after `OK` (e.g. `controller_server IS DOWN`) is
-   teardown, not a failure.
+   known cells about 1170 → 3500, about 35 s. Everything after `OK` is teardown, not a failure:
+   `controller_server IS DOWN`, the container's `exit code -11` (composition crash, see the README's
+   troubleshooting), and `Ran 0 tests` / `NO TESTS RAN` (empty after-shutdown phase).
 
 ## Debugging a failure
 
@@ -50,7 +51,10 @@ Afterwards stop it with `kill -INT -<pgid>`. Known traps:
 - The first `/global_costmap/costmap` message is an all-unknown placeholder.
 - `/map` is reliable + transient_local and only republished about every 5 s. Volatile subscribers
   (e.g. plain `map_saver_cli`) time out.
-- `pgrep -f` and `grep` match their own command line. List processes with `ps -eo args | grep "[g]z sim"`.
+- `pgrep -f` and `grep` match their own command line. List processes with
+  `ps -eo stat,pid,args | grep "[g]z sim"`. State `T` means suspended by Ctrl+Z, not running.
+- `kill -0 <pid>` succeeds on an unreaped zombie. To check for survivors, list the group:
+  `ps -o stat,pid,args -g <pgid>`.
 - A check that returns "0 found" needs a positive control first, to show it can find something.
 
 ## Report

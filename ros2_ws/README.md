@@ -5,7 +5,9 @@ which launches Nav2's **TurtleBot3 reference simulation** with SLAM. The custom 
 (Phase 2) and the C++ explorer (Phase 3) don't exist yet. The Python fire classifier
 lives outside this workspace (`src/perception/`).
 
-All commands below run in **WSL Ubuntu 24.04**, not Windows.
+All commands below run in **WSL Ubuntu 24.04**, not Windows. In PowerShell, `cd /mnt/...` and
+`source` fail. Open the Ubuntu app instead, or run
+`wsl --cd C:\Users\Eason\Downloads\MichaelAI\ros2_ws` from PowerShell.
 
 ## 1. Setup (once)
 
@@ -135,3 +137,11 @@ navigation, and behavior in worlds other than `tb3_sandbox`.
 - **Slow builds**: the repo lives on the Windows drive (`/mnt/c`), and file access there is slow
   from WSL. It works; a clone inside the WSL filesystem (e.g. `~/projects`) is faster.
 - **`rosdep install` fails with "sources list not found"**: run `sudo rosdep init && rosdep update`.
+- **Stop a launch with Ctrl+C, never Ctrl+Z.** Ctrl+Z only suspends it, leaving Gazebo, RViz and
+  Nav2 frozen in the background. To recover, run `jobs -l` in that terminal, then `fg %N` and Ctrl+C
+  for each job.
+- **`Ran 0 tests` / `NO TESTS RAN` after `OK`** is launch_testing's after-shutdown phase, which has no
+  tests defined. It isn't a failure; the result is the `Ran 1 test … OK` line above it.
+- **`component_container_isolated … exit code -11` on shutdown**: Nav2's composed container segfaults
+  while tearing down. It happened in every observed shutdown (5/5, Ctrl+C and test), always after
+  the work was done. With `use_composition:=False` all nodes exited cleanly (1/1). Harmless for now.
