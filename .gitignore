@@ -35,3 +35,15 @@ runs/
 .claude/settings.local.json
 .env
 .streamlit/secrets.toml
+
+# ROS 2 colcon build output
+/ros2_ws/build/
+/ros2_ws/install/
+/ros2_ws/log/
+# colcon run from the repo root by mistake (always build from ros2_ws/)
+/build/
+/install/
+/log/
+
+# Local editor settings
+/.vscode/
