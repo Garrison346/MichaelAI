@@ -1,0 +1,5 @@
+[server]
+# Only accept connections from this computer, not the local network
+address = "localhost"
+# Max image upload size in MB (default is 200)
+maxUploadSize = 10

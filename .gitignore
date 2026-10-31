@@ -8,6 +8,7 @@ __pycache__/
 
 # Model Weights & Output Directories
 *.pt
+!/models/*.pt
 *.onnx
 runs/
 
@@ -16,6 +17,7 @@ runs/
 /dataset/classification/val/
 /dataset/classification/valid/
 /dataset/classification/test/
+/dataset/classification/*.cache
 
 # Detection Dataset Images & Labels
 /dataset/detection/train/
@@ -28,3 +30,20 @@ runs/
 
 # Keep dataset configuration
 !/dataset/detection/data.yaml
+
+# Local settings & secrets
+.claude/settings.local.json
+.env
+.streamlit/secrets.toml
+
+# ROS 2 colcon build output
+/ros2_ws/build/
+/ros2_ws/install/
+/ros2_ws/log/
+# colcon run from the repo root by mistake (always build from ros2_ws/)
+/build/
+/install/
+/log/
+
+# Local editor settings
+/.vscode/
