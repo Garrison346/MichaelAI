@@ -1,0 +1,14 @@
+names:
+- FiRE-indoor
+- light
+- non-fire
+nc: 3
+roboflow:
+  license: CC BY 4.0
+  project: fire-indoor-ghkgq-bysfz
+  url: https://app.roboflow.com/garrison-aqgyj/fire-indoor-ghkgq-bysfz/1
+  version: 1
+  workspace: garrison-aqgyj
+test: ../test/images
+train: ../train/images
+val: ../valid/images
